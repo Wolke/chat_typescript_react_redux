@@ -1,6 +1,5 @@
 "use strict";
 const React = require('react');
-// import * as Messages from "./Messages";
 const Messages_1 = require("./Messages");
 const SendIt_1 = require("./SendIt");
 const io = require('socket.io-client');
@@ -10,10 +9,7 @@ class App extends React.Component {
         this.state = { socket: io(), messages: ["abc"] };
     }
     componentDidMount() {
-        // this.socket = io();
-        // this.messages = [];
         this.state.socket.on("listen", (msg) => {
-            // this.messages.push(msg);
             var ms = this.state.messages;
             ms.push(msg);
             this.setState({ socket: this.state.socket, messages: ms });
