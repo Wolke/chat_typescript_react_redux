@@ -9,7 +9,7 @@ class SendIt extends React.Component {
                 this.props.socket.emit('speak', this.textInput.value);
                 this.textInput.value = "";
                 this.textInput.focus();
-            }}, "Send it!!! momo !!")));
+            }}, "Send it! OK! !!")));
     }
 }
 exports.SendIt = SendIt;

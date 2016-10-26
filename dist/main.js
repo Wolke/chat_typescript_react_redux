@@ -4,14 +4,14 @@ const socketio = require('socket.io');
 const fs = require('fs');
 const webpack = require('webpack');
 var app = express();
-// if(process.env.NODE_ENV=="develop"){
-var webpackConfig = require('./../webpack.config.dev.js');
-var compiler = webpack(webpackConfig);
-app.use(require("webpack-dev-middleware")(compiler, {
-    noInfo: true, publicPath: webpackConfig.output.publicPath
-}));
-app.use(require("webpack-hot-middleware")(compiler));
-// }
+if (process.env.NODE_ENV == "develop") {
+    var webpackConfig = require('./../webpack.config.dev.js');
+    var compiler = webpack(webpackConfig);
+    app.use(require("webpack-dev-middleware")(compiler, {
+        noInfo: true, publicPath: webpackConfig.output.publicPath
+    }));
+    app.use(require("webpack-hot-middleware")(compiler));
+}
 app.get("/bundle.js", (req, rep) => {
     fs.readFile("./dist/bundle.js", (err, data) => {
         if (err) {
