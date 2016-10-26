@@ -14,7 +14,7 @@ export class SendIt extends React.Component<{socket:SocketIOClient.Socket} ,{}> 
                     this.textInput.value="";
                     this.textInput.focus();
                 }} >
-                    Send it!!!
+                    Send it!!! momo !!
                 </button>
         </div>)
     }

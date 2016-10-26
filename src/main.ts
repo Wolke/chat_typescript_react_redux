@@ -6,7 +6,7 @@ import webpack = require('webpack');
 
 var app = express();
 
-if(process.env.NODE_ENV=="develop"){
+// if(process.env.NODE_ENV=="develop"){
     var webpackConfig = require('./../webpack.config.dev.js');
     var compiler = webpack(webpackConfig);
 
@@ -14,8 +14,7 @@ if(process.env.NODE_ENV=="develop"){
         noInfo: true, publicPath: webpackConfig.output.publicPath
     }));
     app.use(require("webpack-hot-middleware")(compiler));
-
-}
+// }
 
 app.get("/bundle.js",(req,rep)=>{
     fs.readFile("./dist/bundle.js",(err,data)=>{

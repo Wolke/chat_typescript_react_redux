@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build" : "tsc",
+    "build" : "tsc & webpack",
     "dev" : "NODE_ENV=develop node dist/main.js", 
-    "start" : "node dist/main.js"
+    "start" : "tsc -w & nodemon dist/main.js"
   },
   "keywords": [],
   "author": "",

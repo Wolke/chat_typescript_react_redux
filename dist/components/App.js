@@ -1,41 +1,28 @@
 "use strict";
 const React = require('react');
 // import * as Messages from "./Messages";
-// import { Messages } from "./Messages";
-// import {SendIt} from "./SendIt";
+const Messages_1 = require("./Messages");
+const SendIt_1 = require("./SendIt");
 const io = require('socket.io-client');
 class App extends React.Component {
     constructor() {
         super();
-        this.state = { messages: ["abc"] };
+        this.state = { socket: io(), messages: ["abc"] };
     }
     componentDidMount() {
-        this.socket = io();
+        // this.socket = io();
         // this.messages = [];
-        this.socket.on("listen", (msg) => {
+        this.state.socket.on("listen", (msg) => {
             // this.messages.push(msg);
             var ms = this.state.messages;
             ms.push(msg);
-            this.setState({ messages: ms });
+            this.setState({ socket: this.state.socket, messages: ms });
         });
     }
     render() {
         return (React.createElement("div", null, 
-            React.createElement("input", {ref: (input) => this.textInput = input}), 
-            React.createElement("button", {onClick: (e) => {
-                e.preventDefault();
-                this.socket.emit('speak', this.textInput.value);
-                this.textInput.value = "";
-                this.textInput.focus();
-            }}, "Send it!!!"), 
-            (() => {
-                return (React.createElement("div", null, 
-                    React.createElement("h1", null, "meaages"), 
-                    this.state.messages.map((msg) => {
-                        console.log(msg);
-                        return (React.createElement("div", null, msg));
-                    })));
-            })()));
+            React.createElement(SendIt_1.SendIt, {socket: this.state.socket}), 
+            React.createElement(Messages_1.Messages, {messgaes: this.state.messages})));
     }
 }
 exports.App = App;
