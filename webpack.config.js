@@ -3,8 +3,6 @@ function root(__path = '.') {
   return path.join(__dirname, __path);
 }
 
-console.log(__dirname);
-
 module.exports = {
     entry: "./src/index.tsx",
     output: {
