@@ -3,17 +3,19 @@ const express = require('express');
 const socketio = require('socket.io');
 const fs = require('fs');
 const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 var app = express();
 // if(process.env.NODE_ENV=="develop"){
-var webpackConfig = require('./../webpack.config.dev.js');
+var webpackConfig = require('./webpack.config.dev');
 var compiler = webpack(webpackConfig);
-app.use(require("webpack-dev-middleware")(compiler, {
+app.use(webpackDevMiddleware(compiler, {
     noInfo: true, publicPath: webpackConfig.output.publicPath
 }));
-app.use(require("webpack-hot-middleware")(compiler));
+app.use(webpackHotMiddleware(compiler));
 // }
 app.get("/bundle.js", (req, rep) => {
-    fs.readFile("./dist/bundle.js", (err, data) => {
+    fs.readFile("./bundle/bundle.js", (err, data) => {
         if (err) {
             console.log(err);
         }
@@ -21,7 +23,7 @@ app.get("/bundle.js", (req, rep) => {
     });
 });
 app.get("/bundle.js.map", (req, rep) => {
-    fs.readFile("./dist/bundle.js.map", (err, data) => {
+    fs.readFile("./bundle/bundle.js.map", (err, data) => {
         if (err) {
             console.log(err);
         }

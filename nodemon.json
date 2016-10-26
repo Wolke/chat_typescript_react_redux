@@ -1,0 +1,9 @@
+{
+    "watch": ["dist"],
+    "ignore": [
+        "node_modules",
+        "dist/bundle"
+    ],
+    "ext": "js json",
+    "exec": "npm run dev"
+}

@@ -1,35 +1,28 @@
 const path = require('path');
-function root(__path = '.') {
-  return path.join(__dirname, __path);
-}
-
+var webpack = require('webpack');
 module.exports = {
-    entry: "./src/index.tsx",
+    devtool: 'cheap-module-eval-source-map',
+    entry: [
+        'webpack-hot-middleware/client',
+        './dist/index.js'
+    ],
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist"
     },
-
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
-
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
-        
-    },
-
+    plugins: [
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
             { test: /\.tsx?$/, loader: "ts-loader" }
         ],
-
         preLoaders: [
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { test: /\.js$/, loader: "source-map-loader" }
         ]
-    },
-
-
+    }
 };
+//# sourceMappingURL=webpack.config.dev.js.map
