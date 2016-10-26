@@ -1,10 +1,4 @@
-export default function chat(state,action){
-    switch(action.type){
-        case 'SPEAK':
-            
+import { combineReducers } from 'redux'
+import chat from './chat'
 
-        case 'LISTEN':
-        
-    }
-    return state
-}
+export const app = combineReducers({chat});
